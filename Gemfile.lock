@@ -70,6 +70,7 @@ GEM
       public_suffix (>= 2.0.2, < 6.0)
     ast (2.4.2)
     backport (1.2.0)
+    bcrypt (3.1.18)
     benchmark (0.2.0)
     bindex (0.8.1)
     bootsnap (1.13.0)
@@ -97,6 +98,10 @@ GEM
     ffi (1.15.5)
     globalid (1.0.0)
       activesupport (>= 5.0)
+    graphiql-rails (1.8.0)
+      railties
+      sprockets-rails
+    graphql (2.0.16)
     i18n (1.12.0)
       concurrent-ruby (~> 1.0)
     importmap-rails (1.1.5)
@@ -149,6 +154,7 @@ GEM
     parallel (1.22.1)
     parser (3.1.2.1)
       ast (~> 2.4.1)
+    pg (1.4.5)
     public_suffix (5.0.0)
     puma (5.6.5)
       nio4r (~> 2.0)
@@ -238,7 +244,6 @@ GEM
       actionpack (>= 5.2)
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
-    sqlite3 (1.5.0-aarch64-linux)
     steep (1.1.1)
       activesupport (>= 5.1)
       language_server-protocol (>= 3.15, < 4.0)
@@ -287,18 +292,21 @@ PLATFORMS
   aarch64-linux
 
 DEPENDENCIES
+  bcrypt (~> 3.1.7)
   bootsnap
   capybara
   debug
+  graphiql-rails
+  graphql
   importmap-rails
   jbuilder
+  pg
   puma (~> 5.0)
   rails (~> 7.0.3, >= 7.0.3.1)
   rbs_rails
   selenium-webdriver
   solargraph
   sprockets-rails
-  sqlite3 (~> 1.4)
   steep
   stimulus-rails
   turbo-rails
