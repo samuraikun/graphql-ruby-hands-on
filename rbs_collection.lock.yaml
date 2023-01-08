@@ -6,6 +6,14 @@ sources:
   repo_dir: gems
 path: ".gem_rbs_collection"
 gems:
+- name: actionmailer
+  version: '7.0'
+  source:
+    type: git
+    name: ruby/gem_rbs_collection
+    revision: 8f2be26c03ad81a7124927ebc4f8e066ba94b92b
+    remote: https://github.com/ruby/gem_rbs_collection.git
+    repo_dir: gems
 - name: actionpack
   version: '6.0'
   source:
@@ -154,11 +162,7 @@ gems:
   version: '0'
   source:
     type: stdlib
-- name: tempfile
-  version: '0'
-  source:
-    type: stdlib
-- name: monitor
+- name: cgi
   version: '0'
   source:
     type: stdlib
@@ -166,11 +170,11 @@ gems:
   version: '0'
   source:
     type: stdlib
-- name: singleton
+- name: logger
   version: '0'
   source:
     type: stdlib
-- name: logger
+- name: monitor
   version: '0'
   source:
     type: stdlib
@@ -178,15 +182,23 @@ gems:
   version: '0'
   source:
     type: stdlib
+- name: singleton
+  version: '0'
+  source:
+    type: stdlib
 - name: time
   version: '0'
   source:
     type: stdlib
-- name: pathname
+- name: tsort
   version: '0'
   source:
     type: stdlib
-- name: tsort
+- name: tempfile
+  version: '0'
+  source:
+    type: stdlib
+- name: pathname
   version: '0'
   source:
     type: stdlib
