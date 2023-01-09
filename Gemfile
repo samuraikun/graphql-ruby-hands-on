@@ -68,6 +68,7 @@ group :development do
   gem 'solargraph'
   gem "rbs_rails", require: false
   gem "steep", require: false
+  gem "graphiql-rails"
 end
 
 group :test do
@@ -75,5 +76,5 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
   gem "webdrivers"
+  gem "rspec-rails"
 end
-gem "graphiql-rails", group: :development
