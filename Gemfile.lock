@@ -101,6 +101,9 @@ GEM
       factory_bot (~> 6.2.0)
       railties (>= 5.0.0)
     ffi (1.15.5)
+    fuubar (2.5.1)
+      rspec-core (~> 3.0)
+      ruby-progressbar (~> 1.4)
     globalid (1.0.0)
       activesupport (>= 5.0)
     graphiql-rails (1.8.0)
@@ -319,6 +322,7 @@ DEPENDENCIES
   capybara
   debug
   factory_bot_rails
+  fuubar
   graphiql-rails
   graphql
   importmap-rails
