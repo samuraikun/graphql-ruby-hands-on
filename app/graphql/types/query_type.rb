@@ -11,11 +11,12 @@ module Types
       description "Find User by ID"
       argument :id, ID, required: true
     end
-    field :users, [Types::UserType], null: false do
-      description "Fetch All Users"
-    end
     def user(id:)
       User.find(id)
+    end
+
+    field :users, [Types::UserType], null: false do
+      description "Fetch All Users"
     end
     def users(page: nil, items: nil)
       User.all

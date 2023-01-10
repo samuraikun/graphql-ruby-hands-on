@@ -11,7 +11,7 @@ module Types
       argument :phone, String, required: false
     end
     def create_user(email:, password:, first_name:, last_name:, username:, postal_code: nil, address: nil, phone: nil)
-      User.create!(
+      input = Inputs::User::CreateUserInput.new(
         email: email,
         password: password,
         first_name: first_name,
@@ -21,6 +21,7 @@ module Types
         address: address,
         phone: phone
       )
+      User::CreateUser.new(input).call
     end
   end
 end
