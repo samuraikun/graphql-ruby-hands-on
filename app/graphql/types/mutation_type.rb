@@ -21,7 +21,9 @@ module Types
         address: address,
         phone: phone
       )
-      User::CreateUser.new(input).call
+      User::CreateUser.new.call(input)
+    rescue Inputs::InputInvalid => e
+      raise GraphQL::ExecutionError.new(input.errors.first.options[:message])
     end
   end
 end
