@@ -31,7 +31,6 @@ RSpec.describe "Articles", type: :request do
       post "/graphql", params: { query: query_string, variables: { userId: @user.id } }
 
       json = JSON.parse(response.body)
-      binding.irb
       expect(json["data"]["articles"][0]["title"]).to eq "test"
     end
   end
