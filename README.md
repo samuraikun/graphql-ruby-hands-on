@@ -32,6 +32,9 @@ $ bin/rails s
 
 Access to `http://0.0.0.0:3000/graphiql`
 
+![Screenshot 2024-05-17 at 17 13 00](https://github.com/samuraikun/graphql-ruby-hands-on/assets/7115171/20f07552-a33f-4753-a626-f64ff56148d6)
+
+
 ### Type Checking
 
 ```bash
