@@ -1,33 +1,40 @@
-# devcontainer for Ruby 3.1 and Rails 7.0
+# devcontainer for Ruby 3.3 and Rails 7.1 and graphql-ruby
 
-Ruby3.1, Ruby on Rails 7.0 の開発環境用の [devcontainer](https://code.visualstudio.com/docs/remote/containers)
+[devcontainer](https://code.visualstudio.com/docs/remote/containers) for Ruby3.3, Ruby on Rails 7.1
 
-* language server: [solargraph](https://github.com/castwide/solargraph)
-* debugging: [debug](https://github.com/ruby/debug)
-* formatter: [rubocop](https://github.com/rubocop/rubocop)
-* type checking: [rbs](https://github.com/ruby/rbs), [rbs_rails](https://github.com/pocke/rbs_rails), [steep](https://github.com/soutaro/steep)
+- language server: [solargraph](https://github.com/castwide/solargraph)
+- debugging: [debug](https://github.com/ruby/debug)
+- formatter: [rubocop](https://github.com/rubocop/rubocop)
+- type checking: [rbs](https://github.com/ruby/rbs), [rbs_rails](https://github.com/pocke/rbs_rails), [steep](https://github.com/soutaro/steep)
 
-## devcontainerを利用する
+## VSCode DevContainer
 
-### remote container のインストール
-※ devcontainer に必要なツールのインストールは[こちら](https://code.visualstudio.com/docs/remote/containers#_installation)
+### Install remote container
 
+※ https://code.visualstudio.com/docs/remote/containers#_installation
 
-### devcontainerの起動
+### devcontainer の起動
 
-1. VSCodeを開き、 `Reopen in Container` を実行する
+1. Open VSCode, then run `Reopen in Container`
 
-## 操作
+## Operation
 
-### サーバーの立ち上げ
-devcontainer上でTerminalを開き、コマンドを実行する
+### Run Rails server
+
+Run below command in terminal on the DevContainer
+
 ```bash
+$ bin/rails db:seed
 $ bin/rails s
 ```
 
+### GraphQL Playground
+
+Access to `http://0.0.0.0:3000/graphiql`
+
 ### Type Checking
+
 ```bash
-# gem collection の install
 $ bundle exec rbs collection install
 
 # rbs_rails
@@ -38,7 +45,8 @@ $ bundle exec steep check
 ```
 
 ### Solargraph
-``` bash
+
+```bash
 # Generate documentation for bundled gems
 $ bundle exec solargraph bundle
 
@@ -47,12 +55,12 @@ $ bundle exec solargraph download-core
 ```
 
 ## Debugging
-devcontainer上で、 `デバッグを実行` を実行する(ショートカットキー: F5)
 
-`デバッグを実行` を利用すると[VSCode Debugging](https://code.visualstudio.com/docs/editor/debugging)が利用可能
+Run `Run Debug` (Shortcut key: F5)
+
+[VSCode Debugging](https://code.visualstudio.com/docs/editor/debugging)
 
 <img width="900" alt="debugging" src="https://user-images.githubusercontent.com/1701108/189269013-1c9c8e8e-f6df-4cc1-b695-4fc9130d85a2.png">
-
 
 ## VSCode extensions
 
@@ -65,15 +73,17 @@ devcontainer上で、 `デバッグを実行` を実行する(ショートカッ
 - [VisualStudioExptTeam.vscodeintellicode](https://marketplace.visualstudio.com/items?itemName=VisualStudioExptTeam.vscodeintellicode)
 - [esbenp.prettier-vscode](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
 - [EditorConfig.EditorConfig](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig)
+- [GitHub.copilot](https://marketplace.visualstudio.com/items?itemName=GitHub.copilot)
+- [GitHub.copilot-chat](https://marketplace.visualstudio.com/items?itemName=GitHub.copilot-chat)
 
-## 構成
+## Architecture
 
-docker compose で構成
+Work on Docker Compose
 
 - app: [ruby:3.1-bullseye](https://hub.docker.com/_/ruby)
 - postgres: [postgres:14](https://hub.docker.com/_/postgres)
 
-## リファレンス
+## References
 
 - [Visual Studio Code Doc - Developing inside a Container](https://code.visualstudio.com/docs/remote/containers)
 - [VS Code Solargraph Extension](https://github.com/castwide/vscode-solargraph)

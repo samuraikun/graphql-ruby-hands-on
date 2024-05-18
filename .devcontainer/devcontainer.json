@@ -17,7 +17,10 @@
         "soutaro.rbs-syntax",
         "VisualStudioExptTeam.vscodeintellicode",
         "esbenp.prettier-vscode",
-        "EditorConfig.EditorConfig"
+        "EditorConfig.EditorConfig",
+        "ms-azuretools.vscode-docker",
+        "GitHub.copilot",
+        "GitHub.copilot-chat"
       ],
       "settings": {
         "ruby.useBundler": true,

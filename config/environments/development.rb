@@ -1,14 +1,15 @@
 require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
-  config.after_initialize do
-    Bullet.enable        = true
-    Bullet.alert         = true
-    Bullet.bullet_logger = true
-    Bullet.console       = true
-    Bullet.rails_logger  = true
-    Bullet.add_footer    = true
-  end
+  # NOTE: 2024/5/17 Bullet does not support active_record 7.1.3.3 yet
+  # config.after_initialize do
+  #   Bullet.enable        = true
+  #   Bullet.alert         = true
+  #   Bullet.bullet_logger = true
+  #   Bullet.console       = true
+  #   Bullet.rails_logger  = true
+  #   Bullet.add_footer    = true
+  # end
 
   # Settings specified here will take precedence over those in config/application.rb.
 
