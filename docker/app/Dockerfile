@@ -28,3 +28,4 @@ RUN gem install debug
 WORKDIR /workspace
 
 ENV SOLARGRAPH_CACHE=/workspace/.solargraph
+ENV RUBY_YJIT_ENABLE=1

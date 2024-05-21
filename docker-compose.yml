@@ -1,5 +1,3 @@
-version: '3'
-
 services:
   app: &app
     build:
@@ -12,25 +10,129 @@ services:
       - .:/workspace:cached
       - bundle-volume:/workspace/vendor/bundle
       - node-module-volume:/workspace/node_modules
+      - log-data:/workspace/log
+      - tmp-data:/workspace/tmp
+      - public-data:/workspace/public
+    environment:
+      RAILS_ENV: development
+      RAILS_LOG_TO_STDOUT: true
+      RAILS_MAX_THREADS: 5
+      DATABASE_URL: postgres://pg:password@postgres:5432
+      REDIS_URL: redis://redis:6379/
+      DD_AGENT_HOST: datadog-agent
+      DD_ENV: development
+      DD_SERVICE: "graphql-ruby-hands-on"
+      DD_VERSION: latest
+      DD_TRACE_AGENT_PORT: 8126
+      DD_TRACE_STARTUP_LOGS: false
+    tty: true
+    stdin_open: true
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
     command: bash -c 'bin/setup && bin/rails s -b 0.0.0.0'
-  # webpacker:
-  #   <<: *app
-  #   command: bin/webpack-dev-server
-  #   ports:
-  #     - 3035:3035
+    networks:
+      - default
+
+  sidekiq:
+    build:
+      context: .
+      dockerfile: docker/app/Dockerfile
+    env_file: .env
+    tty: true
+    stdin_open: true
+    volumes:
+      - .:/workspace:cached
+      - bundle-volume:/workspace/vendor/bundle
+      - node-module-volume:/workspace/node_modules
+      - log-data:/workspace/log
+      - tmp-data:/workspace/tmp
+      - public-data:/workspace/public
+    environment:
+      BUNDLE_HOME: /workspace/vendor/bundle
+      RAILS_ENV: development
+      DATABASE_URL: postgres://pg:password@postgres:5432
+      REDIS_URL: redis://redis:6379/
+      DD_AGENT_HOST: datadog-agent
+      DD_ENV: development
+      DD_SERVICE: "graphql-ruby-hands-on"
+      DD_VERSION: latest
+      DD_TRACE_AGENT_PORT: 8126
+      DD_TRACE_STARTUP_LOGS: false
+    command: >-
+      bash -c '
+        bundle install --jobs 4 --retry 3 &&
+        bundle exec sidekiq -C config/sidekiq.yml
+      '
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - default
+
   postgres:
     image: postgres:14
     restart: unless-stopped
     volumes:
       - postgres-volume:/var/lib/postgresql/data
     environment:
-      POSTGRES_USER: pg
+      POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
     ports:
       - 5432:5432
+    healthcheck:
+      test: pg_isready -U postgres -h 127.0.0.1
+      interval: 3s
+    networks:
+      - default
+
+  redis:
+    image: redis:7.0-alpine
+    volumes:
+      - redis:/data
+    ports:
+      - 6379
+    healthcheck:
+      test: redis-cli ping
+      interval: 1s
+      timeout: 3s
+      retries: 30
+    networks:
+      - default
+
+  # datadog-agent
+  # datadog-agent:
+  #   image: public.ecr.aws/datadog/agent:latest
+  #   container_name: datadog-agent
+  #   env_file: .env
+  #   environment:
+  #     DD_API_KEY: ${DD_API_KEY}
+  #     DD_ENV: development
+  #     DD_VERSION: latest
+  #     DD_SITE: "datadoghq.com"
+  #     DD_HOSTNAME: "datadog"
+  #     DD_SERVICE: "graphql-ruby-hands-on"
+  #     DD_APM_ENABLED: true
+  #     DD_APM_NON_LOCAL_TRAFFIC: true
+  #     DD_LOGS_ENABLED: true
+  #     DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL: true
+  #   volumes:
+  #     - /var/run/docker.sock:/var/run/docker.sock:ro
+  #     - /proc/:/host/proc/:ro
+  #     - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
+  #     - /var/lib/docker/containers:/var/lib/docker/containers:ro
+  #     - log-data:/workspace/log
+  #   networks:
+  #     - default
 volumes:
   postgres-volume:
   bundle-volume:
   node-module-volume:
+  redis:
+  log-data:
+  tmp-data:
+  public-data:
