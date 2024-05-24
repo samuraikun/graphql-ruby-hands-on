@@ -104,30 +104,33 @@ services:
     networks:
       - default
 
-  # datadog-agent
-  # datadog-agent:
-  #   image: public.ecr.aws/datadog/agent:latest
-  #   container_name: datadog-agent
-  #   env_file: .env
-  #   environment:
-  #     DD_API_KEY: ${DD_API_KEY}
-  #     DD_ENV: development
-  #     DD_VERSION: latest
-  #     DD_SITE: "datadoghq.com"
-  #     DD_HOSTNAME: "datadog"
-  #     DD_SERVICE: "graphql-ruby-hands-on"
-  #     DD_APM_ENABLED: true
-  #     DD_APM_NON_LOCAL_TRAFFIC: true
-  #     DD_LOGS_ENABLED: true
-  #     DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL: true
-  #   volumes:
-  #     - /var/run/docker.sock:/var/run/docker.sock:ro
-  #     - /proc/:/host/proc/:ro
-  #     - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
-  #     - /var/lib/docker/containers:/var/lib/docker/containers:ro
-  #     - log-data:/workspace/log
-  #   networks:
-  #     - default
+  datadog-agent:
+    build:
+      context: .
+      dockerfile: docker/datadog/Dockerfile
+    container_name: datadog-agent
+    env_file: .env
+    environment:
+      DD_API_KEY: ${DD_API_KEY}
+      DD_ENV: development
+      DD_VERSION: latest
+      DD_SITE: "us3.datadoghq.com"
+      DD_HOSTNAME: "datadog"
+      DD_SERVICE: "graphql-ruby-hands-on"
+      DD_APM_ENABLED: true
+      DD_APM_NON_LOCAL_TRAFFIC: true
+      DD_LOGS_ENABLED: true
+      DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL: false
+      DD_CONTAINER_EXCLUDE: "name:datadog-agent"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /proc/:/host/proc/:ro
+      - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro
+      - log-data:/workspace/log
+    networks:
+      - default
+
 volumes:
   postgres-volume:
   bundle-volume:
