@@ -1,0 +1,7 @@
+# https://docs.datadoghq.com/logs/log_collection/ruby/?tab=lograge#configure-the-datadog-agent
+logs:
+  - type: file
+    path: "/workspace/log/development.log"
+    service: graphql-ruby-hands-on
+    source: ruby
+    sourcecategory: sourcecode

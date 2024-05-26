@@ -59,8 +59,8 @@ gem "batch-loader"
 gem "ddtrace", require: "ddtrace/auto_instrument"
 
 # Logging
-# gem "lograge"
-# gem "lograge-sql"
+gem "lograge"
+gem "lograge-sql"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
