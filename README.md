@@ -1,4 +1,4 @@
-# devcontainer for Ruby 3.3 and Rails 7.1 and graphql-ruby
+# DevContainer for Ruby 3.3, Rails 7.1, graphql-ruby, and Sidekiq
 
 [devcontainer](https://code.visualstudio.com/docs/remote/containers) for Ruby3.3, Ruby on Rails 7.1
 
@@ -13,7 +13,7 @@
 
 ※ https://code.visualstudio.com/docs/remote/containers#_installation
 
-### devcontainer の起動
+### Run DevContainer
 
 1. Open VSCode, then run `Reopen in Container`
 
@@ -33,7 +33,6 @@ $ bin/rails s
 Access to `http://0.0.0.0:3000/graphiql`
 
 ![Screenshot 2024-05-17 at 17 13 00](https://github.com/samuraikun/graphql-ruby-hands-on/assets/7115171/20f07552-a33f-4753-a626-f64ff56148d6)
-
 
 ### Type Checking
 
@@ -84,7 +83,9 @@ Run `Run Debug` (Shortcut key: F5)
 Work on Docker Compose
 
 - app: [ruby:3.1-bullseye](https://hub.docker.com/_/ruby)
+- sidekiq: [v7](https://github.com/sidekiq/sidekiq)
 - postgres: [postgres:14](https://hub.docker.com/_/postgres)
+- redis: [redis:7](https://hub.docker.com/_/redis)
 
 ## References
 

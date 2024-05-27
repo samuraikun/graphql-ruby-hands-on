@@ -28,8 +28,11 @@ gem "stimulus-rails"
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
 
+# Background Job
+gem "sidekiq"
+gem "sidekiq-scheduler"
 # Use Redis adapter to run Action Cable in production
-# gem "redis", "~> 4.0"
+gem "redis"
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
@@ -51,6 +54,13 @@ gem "bootsnap", require: false
 
 gem "graphql"
 gem "batch-loader"
+
+# Datadog
+gem "ddtrace", require: "ddtrace/auto_instrument"
+
+# Logging
+gem "lograge"
+gem "lograge-sql"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

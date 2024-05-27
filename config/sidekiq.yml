@@ -1,0 +1,30 @@
+:concurrency: 5
+:queues:
+  - default
+  - mailers
+
+:logging: true
+
+:development:
+  :concurrency: 3
+  :queues:
+    - [default, 1]
+    - [mailers, 2]
+
+:test:
+  :concurrency: 1
+  :queues:
+    - [default, 1]
+    - [mailers, 1]
+
+:production:
+  :concurrency: 10
+  :queues:
+    - [default, 1]
+    - [mailers, 2]
+
+:scheduler:
+  :schedule:
+    sample_job:
+      cron: "0 * * * * *" # Runs once per minute
+      class: SampleJob

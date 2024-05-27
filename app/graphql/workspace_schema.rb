@@ -4,6 +4,8 @@ class WorkspaceSchema < GraphQL::Schema
 
   # For batch-loading (see https://github.com/exAspArk/batch-loader)
   use BatchLoader::GraphQL
+  # For tracing (see https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/dd_libraries/ruby/#graphql)
+  use GraphQL::Tracing::DataDogTracing, service: 'graphql-ruby-hands-on-graphql'
 
   # GraphQL-Ruby calls this when something goes wrong while running a query:
   def self.type_error(err, context)
